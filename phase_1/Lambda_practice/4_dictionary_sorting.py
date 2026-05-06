@@ -1,4 +1,4 @@
-#Write a Python program to sort a list of dictionaries using Lambda.
+#Write a Python program to sort a list of dictionaries using Lambda, sorting by their color.
 
 dictionary = [
                 {'make': 'Nokia', 'model': 216, 'color': 'Black'}, 
