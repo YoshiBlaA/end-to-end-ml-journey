@@ -10,7 +10,8 @@ Sample Output:
 add = lambda x: 15 + x
 multiply = lambda x, y: x*y
 
-x = int(input(""))
+x = int(input())
+y = int(input())
 
-print(add(1))
-print(multiply(234,10))
+print(add(x))
+print(multiply(x,y))
