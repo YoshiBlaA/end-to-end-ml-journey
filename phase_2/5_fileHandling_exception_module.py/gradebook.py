@@ -40,7 +40,8 @@ class GradeBook(Student):
         with open(json_filename, "w") as f:
             
             """
-            Create a dictionary representation of the gradebook data, which includes the course name and a list of students with their respective grades. This dictionary will then be serialized to JSON and written to the specified file.
+            Create a dictionary representation of the gradebook data, which includes the course name and a list of students with their respective 
+                grades. This dictionary will then be serialized to JSON and written to the specified file.
             E.g.
             {
                 "course": "Computer Science",
@@ -76,35 +77,45 @@ class GradeBook(Student):
     def load(cls, json_filename:str):
         
         """
-        Load the gradebook data from a JSON file and reconstruct the GradeBook object. The JSON file is expected to contain the course name and a list of students with their respective grades. If the file is not found, is not a valid JSON file, or is missing required keys, appropriate exceptions will be raised.
-        Args:
-            json_filename (str): The name of the JSON file from which to load the gradebook data.
-        Returns:
-            GradeBook: A GradeBook object reconstructed from the data loaded from the JSON file.
-        Raises:
-            FileNotFoundError: If the specified JSON file is not found.
-            json.JSONDecodeError: If the specified file is not a valid JSON file.
-            KeyError: If the specified JSON file is missing required keys (e.g., "course" or "students").
-        Self Notes:
-            cls: The class method decorator allows this method to be called on the class itself rather than on an instance of the class. This is useful for creating a new instance of the GradeBook class based on the data loaded from the JSON file.
+            Load the gradebook data from a JSON file and reconstruct the GradeBook object. The JSON file is expected to contain the course name 
+                and a list of students with their respective grades. If the file is not found, is not a valid JSON file, or is missing required 
+                keys, appropriate exceptions will be raised.
+            Args:
+                json_filename (str): The name of the JSON file from which to load the gradebook data.
+            Returns:
+                GradeBook: A GradeBook object reconstructed from the data loaded from the JSON file.
+            Raises:
+                FileNotFoundError: If the specified JSON file is not found.
+                json.JSONDecodeError: If the specified file is not a valid JSON file.
+                KeyError: If the specified JSON file is missing required keys (e.g., "course" or "students").
+            Self Notes:
+                cls: The class method decorator allows this method to be called on the class itself rather than on an instance of the class. 
+                     This is useful for creating a new instance of the GradeBook class based on the data loaded from the JSON file.
         """
         
-        def reconstruct_student(student_dict:dict) -> Student:
+        #def reconstruct_student(student_dict:dict) -> Student:
             
-            """
-            Reconstruct a Student object from a dictionary representation of a student, which includes the name and grades. This function will be used to create Student objects from the data loaded from the JSON file.
+        """
+            Reconstruct a Student object from a dictionary representation of a student, which includes the name and grades. This function will 
+                be used to create Student objects from the data loaded from the JSON file.
             Args:
                 student_dict (dict): A dictionary representation of a student, which includes the name and grades.
             Returns:
                 Student: A Student object reconstructed from the provided dictionary.
-            """
-            return Student(student_dict["name"], student_dict["grades"])
+        """
+        #    return Student(student_dict["name"], student_dict["grades"])
         
         try:
             with open(json_filename, "r") as f:
                 data = json.load(f)
             
+            # Lambda function to reconstruct a Student object from a dictionary representation of a student, which includes the name and grades. 
+            # This function will be used to create Student objects from the data loaded from the JSON file.
+            # Also not lambda function can be used here, but I wanted to demonstrate how a lambda function can be used in this context as well.
+            reconstruct_student = lambda student_dict : Student(student_dict["name"], student_dict["grades"])
+            
             students = {student_dict["name"] : reconstruct_student(student_dict) for student_dict in data["students"]}
+            #students = {student_dict["name"] : reconstruct_student(student_dict) for student_dict in data["students"]}
             return cls(data["course"], students)
         
         except FileNotFoundError:
@@ -117,7 +128,8 @@ class GradeBook(Student):
     def summary(self):
         
         """
-        Print a summary of the gradebook, including the course name and the overall average grade for each student. If there are no students in the gradebook, a ValueError will be raised.
+        Print a summary of the gradebook, including the course name and the overall average grade for each student. If there are no students in 
+            the gradebook, a ValueError will be raised.
         Raises:
             ValueError: If there are no students in the gradebook.
         """
@@ -147,5 +159,9 @@ if __name__ == "__main__":
 
     gb.save("gradebook.json")
 
-    loaded = GradeBook.load("gradebook.json") # This will load the gradebook data from the "gradebook.json" file and reconstruct a GradeBook object based on that data. If the file is not found, is not a valid JSON file, or is missing required keys, appropriate exceptions will be raised.
-    loaded.summary() # This will print a summary of the loaded gradebook, including the course name and the overall average grade for each student.
+    loaded = GradeBook.load("gradebook.json") # This will load the gradebook data from the "gradebook.json" file and reconstruct 
+                                              # a GradeBook object based on that data. If the file is not found, is not a valid JSON file, 
+                                              # or is missing required keys, appropriate exceptions will be raised.
+                                              
+    loaded.summary() # This will print a summary of the loaded gradebook, including the course name and the overall average grade for each 
+                     # student.
