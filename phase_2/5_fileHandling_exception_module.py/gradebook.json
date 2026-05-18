@@ -1,0 +1,28 @@
+{
+    "course": "Computer Science",
+    "students": [
+        {
+            "name": "Alice",
+            "grades": {
+                "Math": [
+                    90,
+                    85
+                ],
+                "Algorithms": [
+                    78
+                ]
+            }
+        },
+        {
+            "name": "Bob",
+            "grades": {
+                "Math": [
+                    70
+                ],
+                "Algorithms": [
+                    95
+                ]
+            }
+        }
+    ]
+}
