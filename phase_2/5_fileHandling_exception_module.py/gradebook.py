@@ -89,22 +89,22 @@ class GradeBook(Student):
             cls: The class method decorator allows this method to be called on the class itself rather than on an instance of the class. This is useful for creating a new instance of the GradeBook class based on the data loaded from the JSON file.
         """
         
-        def reconstruct_student(student):
+        def reconstruct_student(student_dict:dict) -> Student:
             
             """
             Reconstruct a Student object from a dictionary representation of a student, which includes the name and grades. This function will be used to create Student objects from the data loaded from the JSON file.
             Args:
-                student (dict): A dictionary representation of a student, which includes the name and grades.
+                student_dict (dict): A dictionary representation of a student, which includes the name and grades.
             Returns:
                 Student: A Student object reconstructed from the provided dictionary.
             """
-            return Student(student["name"], student["grades"])
+            return Student(student_dict["name"], student_dict["grades"])
         
         try:
             with open(json_filename, "r") as f:
                 data = json.load(f)
             
-            students = {student["name"] : reconstruct_student(student) for student in data["students"]}
+            students = {student_dict["name"] : reconstruct_student(student_dict) for student_dict in data["students"]}
             return cls(data["course"], students)
         
         except FileNotFoundError:
