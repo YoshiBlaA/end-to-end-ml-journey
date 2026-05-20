@@ -36,16 +36,18 @@ pythongastos = {
     "services": 950
 }
 
-print("=== Expense Report ===")
-for category, amount in pythongastos.items():
-    print(f'{category.ljust(15)}: ${amount}')
-    
-total = sum(pythongastos.values())
-average = round(total / len(pythongastos), 2)
-highest_expense = max(pythongastos.items(), key = lambda item : item[1])
-lowest_expense = min(pythongastos.items(), key = lambda item : item[1])
+if __name__ == "__main__":
 
-print(f'\nTotal: ${total}')
-print(f'Average: ${average}')
-print(f'Highest expense: {highest_expense[0]} (${highest_expense[1]})')
-print(f'Lowest expense: {lowest_expense[0]} (${lowest_expense[1]})')
+    print("=== Expense Report ===")
+    for category, amount in pythongastos.items():
+        print(f'{category.ljust(15)}: ${amount}')
+        
+    total = sum(pythongastos.values())
+    average = round(total / len(pythongastos), 2)
+    highest_expense = max(pythongastos.items(), key = lambda item : item[1])
+    lowest_expense = min(pythongastos.items(), key = lambda item : item[1])
+
+    print(f'\nTotal: ${total}')
+    print(f'Average: ${average}')
+    print(f'Highest expense: {highest_expense[0]} (${highest_expense[1]})')
+    print(f'Lowest expense: {lowest_expense[0]} (${lowest_expense[1]})')
